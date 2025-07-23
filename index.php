@@ -1,5 +1,11 @@
 <?php
-require_once './functions.php'
+require_once './functions.php';
+if (isset($_GET['length'])) {
+  session_start();
+  $_SESSION['length'] = $_GET['length'];
+  $_SESSION['password'] = generate_password($_GET['length']);
+  header('Location: ./result.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,15 +34,7 @@ require_once './functions.php'
         <div class="col mb-3">
           <h1>🔐 Strong Password Generator</h1>
           <h3 class="text-muted">Genera una password sicura</h3>
-          <div
-            class=" alert alert-success <?php if (!isset($_GET['length'])) echo 'd-none'; ?>"
-            role=" alert">
-            <?php
-            if (isset($_GET['length'])) {
-              echo generate_password($_GET['length']);
-            }
-            ?>
-          </div>
+
 
         </div>
       </div>

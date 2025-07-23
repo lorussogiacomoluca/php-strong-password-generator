@@ -19,6 +19,5 @@ function generate_password($length)
     $password .= $scelta_carattere;
     $contatore++;
   }
-
   return $password;
 }
