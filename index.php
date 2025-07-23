@@ -2,8 +2,12 @@
 require_once './functions.php';
 if (isset($_GET['length'])) {
   session_start();
+  $indici = [0];
+  if (isset($_GET['maiuscole'])) $indici[] = 1;
+  if (isset($_GET['numeri']))    $indici[] = 2;
+  if (isset($_GET['simboli']))   $indici[] = 3;
   $_SESSION['length'] = $_GET['length'];
-  $_SESSION['password'] = generate_password($_GET['length']);
+  $_SESSION['password'] = generate_password($_GET['length'], $indici);
   header('Location: ./result.php');
 }
 ?>
@@ -44,6 +48,28 @@ if (isset($_GET['length'])) {
             <div class="mb-3 d-flex justify-content-between align-items-center">
               <label for="length" class="form-label">Lunghezza</label>
               <input type="number" class="form-control w-50" name="length" min='1' required>
+            </div>
+            <div class="row d-flex justify-content-end">
+              <div class="col-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="1" name="maiuscole">
+                  <label class="form-check-label" for="maiuscole">
+                    Lettere Maiuscole
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="2" name="numeri">
+                  <label class="form-check-label" for="numeri">
+                    Numeri
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="3" name="simboli">
+                  <label class="form-check-label" for="simboli">
+                    Simboli
+                  </label>
+                </div>
+              </div>
             </div>
             <div class="text-start">
               <button type="submit" class="btn btn-dark">Submit</button>
